@@ -27,6 +27,7 @@ router.post(
       const sql = "SELECT * FROM users WHERE email = ? AND role = 'receptionist'";
       db.query(sql, [email], async (err, result) => {
         if (err) {
+          console.error("Database query failed:", err);
           return res.status(500).json({ error: "Database query failed" });
         }
 
@@ -42,10 +43,13 @@ router.post(
           return res.status(400).json({ error: "Invalid password" });
         }
 
+        // ✅ Ensure JWT_SECRET is defined
+        const jwtSecret = process.env.JWT_SECRET || "fallback_secret"; // Fallback if .env is missing
+
         // Generate JWT Token
         const token = jwt.sign(
           { id: user.id, role: user.role },
-          process.env.JWT_SECRET,
+          jwtSecret,
           { expiresIn: "1h" }
         );
 
