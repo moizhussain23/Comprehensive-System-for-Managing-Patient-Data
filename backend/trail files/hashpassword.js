@@ -6,4 +6,4 @@ const generateHash = async (password) => {
   console.log("Hashed Password:", hashedPassword);
 };
 
-generateHash("receptionist2@pass");  // Change this to the new password you want
+generateHash("doctor12@pass");  // Change this to the new password you want

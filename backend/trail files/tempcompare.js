@@ -1,11 +1,12 @@
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 
-const testPassword = async () => {
-    const plainPassword = "newpassword1";  // Replace with what you entered in Postman
-    const hashedPassword = "$2b$10$9DjbYNuTKePioPdcJ5g4e.fs7K7AkN0m6DVhWqJpgAVu2z7bn/q/O";  // Copy from the database
+const enteredPassword = "doctor12@pass"; // 🔹 Replace with the actual password you want to check
+const storedHash = "$2b$10$YmULRpDmntL.Y8EXPm7WZ.BESl2LyZB77PyeTItXKljwYCKNK7hyq"; // 🔹 Replace with the actual hash from your database
 
-    const isMatch = await bcrypt.compare(plainPassword, hashedPassword);
-    console.log("Password Match:", isMatch);
-};
-
-testPassword();
+bcrypt.compare(enteredPassword, storedHash, (err, result) => {
+  if (err) {
+    console.error("Error comparing password:", err);
+  } else {
+    console.log("Password Match:", result ? "✅ Yes" : "❌ No");
+  }
+});
