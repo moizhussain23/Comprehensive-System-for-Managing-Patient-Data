@@ -9,7 +9,7 @@ router.get("/profile", authenticateDoctor, async (req, res) => {
     const sql = "SELECT id, name, email FROM users WHERE id = ? AND role = 'doctor'";
     db.query(sql, [req.user.id], (err, result) => {
       if (err) {
-        console.error("❌ Database query failed:", err);
+        console.error("Database query failed:", err);
         return res.status(500).json({ error: "Database error" });
       }
 
@@ -17,16 +17,16 @@ router.get("/profile", authenticateDoctor, async (req, res) => {
         return res.status(404).json({ error: "Doctor not found" });
       }
 
-      res.json(result[0]); // ✅ Send doctor data
+      res.json(result[0]); //  Send doctor data
     });
   } catch (error) {
-    console.error("❌ Error fetching doctor:", error);
+    console.error("Error fetching doctor:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
 
 /* ====================================================
-   ✅ Fetch Patients Assigned to the Doctor
+    Fetch Patients Assigned to the Doctor
    ==================================================== */
    router.get("/patients", authenticateDoctor, async (req, res) => {
     try {
@@ -34,19 +34,19 @@ router.get("/profile", authenticateDoctor, async (req, res) => {
       
       db.query(sql, (err, results) => {
         if (err) {
-          console.error("❌ Error fetching patients:", err);
+          console.error("Error fetching patients:", err);
           return res.status(500).json({ error: "Database query failed" });
         }
         res.json({ success: true, patients: results });
       });
     } catch (error) {
-      console.error("❌ Error:", error);
+      console.error("Error:", error);
       res.status(500).json({ error: "Server error" });
     }
   });
 
 /* ====================================================
-   ✅ Add Prescription for a Patient
+    Add Prescription for a Patient
    ==================================================== */
    router.post("/add-prescription", authenticateDoctor, (req, res) => {
     const { patient_id, patientId, medicines } = req.body;
@@ -54,29 +54,29 @@ router.get("/profile", authenticateDoctor, async (req, res) => {
     const doctor_id = req.user.id;
     const date = new Date(); // Current date
   
-    // ✅ Ensure patient_id and medicines array exist
+    //  Ensure patient_id and medicines array exist
     if (!actual_patient_id || !Array.isArray(medicines) || medicines.length === 0) {
       return res.status(400).json({ error: "Patient ID and at least one medicine are required" });
     }
   
-    // ✅ Step 1: Insert Prescription Record
+    //   Insert Prescription Record
     const prescriptionSql = "INSERT INTO prescriptions (doctor_id, patient_id, date) VALUES (?, ?, ?)";
     
     db.query(prescriptionSql, [doctor_id, actual_patient_id, date], (err, result) => {
       if (err) {
-        console.error("❌ Error adding prescription:", err);
+        console.error("Error adding prescription:", err);
         return res.status(500).json({ error: "Failed to add prescription" });
       }
   
       const prescription_id = result.insertId;
   
-      // ✅ Step 2: Insert Each Medicine into prescription_medicines
+      //  Insert Each Medicine into prescription_medicines
       const medicineSql = "INSERT INTO prescription_medicines (prescription_id, medication, dosage, frequency, duration, notes) VALUES ?";
       const medicineValues = medicines.map(med => [prescription_id, med.medication, med.dosage, med.frequency, med.duration, med.notes]);
   
       db.query(medicineSql, [medicineValues], (err, result) => {
         if (err) {
-          console.error("❌ Error adding medicines:", err);
+          console.error("Error adding medicines:", err);
           return res.status(500).json({ error: "Failed to add medicines" });
         }
   
@@ -86,7 +86,7 @@ router.get("/profile", authenticateDoctor, async (req, res) => {
 });
 
 /* ====================================================
-   ✅ Get Prescriptions for a Patient
+  Get Prescriptions for a Patient
    ==================================================== */
    router.get("/patient/:id/prescriptions", authenticateDoctor, (req, res) => {
     const patientId = req.params.id;
@@ -103,7 +103,7 @@ router.get("/profile", authenticateDoctor, async (req, res) => {
   
     db.query(sql, [patientId], (err, results) => {
       if (err) {
-        console.error("❌ Database Query Error:", err.sqlMessage); // ✅ Log exact SQL error
+        console.error("Database Query Error:", err.sqlMessage); // Log exact SQL error
         return res.status(500).json({ error: "Database query failed", details: err.sqlMessage });
       }
   
@@ -113,7 +113,7 @@ router.get("/profile", authenticateDoctor, async (req, res) => {
         if (!prescriptionsMap.has(row.prescription_id)) {
           prescriptionsMap.set(row.prescription_id, {
             prescription_id: row.prescription_id,
-            date: row.date, // ✅ Now using the formatted date from SQL
+            date: row.date, // Now using the formatted date from SQL
             medicines: []
           });
         }
@@ -137,7 +137,7 @@ router.get("/profile", authenticateDoctor, async (req, res) => {
   });
   
 /* ====================================================
-   ✅ Schedule an Upcoming Visit
+   Schedule an Upcoming Visit
    ==================================================== */
 router.post("/add-visit", authenticateDoctor, (req, res) => {
   const { patientId, visitDate } = req.body;
@@ -150,7 +150,7 @@ router.post("/add-visit", authenticateDoctor, (req, res) => {
   const sql = "INSERT INTO visits (doctor_id, patient_id, visit_date) VALUES (?, ?, ?)";
   db.query(sql, [doctorId, patientId, visitDate], (err, result) => {
     if (err) {
-      console.error("❌ Error scheduling visit:", err);
+      console.error("Error scheduling visit:", err);
       return res.status(500).json({ error: "Failed to schedule visit" });
     }
     res.json({ success: true, message: "Visit scheduled successfully" });
@@ -158,7 +158,7 @@ router.post("/add-visit", authenticateDoctor, (req, res) => {
 });
 
 /* ====================================================
-   ✅ Fetch all scheduled visits for a Doctor
+   Fetch all scheduled visits for a Doctor
    ==================================================== */
 
 router.get("/upcoming-visits", authenticateDoctor, (req, res) => {
@@ -174,7 +174,7 @@ router.get("/upcoming-visits", authenticateDoctor, (req, res) => {
 
   db.query(sql, [doctor_id], (err, results) => {
     if (err) {
-      console.error("❌ Error fetching visits:", err);
+      console.error("Error fetching visits:", err);
       return res.status(500).json({ error: "Database query failed" });
     }
     res.json({ success: true, visits: results,doctor_id:doctor_id });
@@ -182,7 +182,7 @@ router.get("/upcoming-visits", authenticateDoctor, (req, res) => {
 });
 
 /* ====================================================
-   ✅ Modify an already scheduled visit
+   Modify an already scheduled visit
    ==================================================== */
 
 router.put("/visit/:id", authenticateDoctor, (req, res) => {
@@ -197,7 +197,7 @@ router.put("/visit/:id", authenticateDoctor, (req, res) => {
   const checkVisitSql = "SELECT * FROM visits WHERE id = ? AND doctor_id = ?";
   db.query(checkVisitSql, [visit_id, doctorId], (err, results) => {
     if (err) {
-      console.error("❌ Database error:", err);
+      console.error("Database error:", err);
       return res.status(500).json({ error: "Database query failed" });
     }
 
@@ -205,11 +205,11 @@ router.put("/visit/:id", authenticateDoctor, (req, res) => {
       return res.status(404).json({ error: "Visit not found or may have been deleted" });
     }
 
-    // ✅ Update visit only if it exists
+    // Update visit only if it exists
     const updateSql = "UPDATE visits SET visit_date = ? WHERE id = ? AND doctor_id = ?";
     db.query(updateSql, [visit_date, visit_id, doctorId], (err, result) => {
       if (err) {
-        console.error("❌ Update error:", err);
+        console.error("Update error:", err);
         return res.status(500).json({ error: "Failed to update visit" });
       }
 
@@ -219,7 +219,7 @@ router.put("/visit/:id", authenticateDoctor, (req, res) => {
 });
 
 /* ====================================================
-   ✅ Doctor to cancel a visit
+   Doctor to cancel a visit
    ==================================================== */
 
 router.delete("/visit/:id", authenticateDoctor, (req, res) => {
@@ -236,7 +236,7 @@ router.delete("/visit/:id", authenticateDoctor, (req, res) => {
 });
 
 /* ====================================================
-   ✅ Fetch Upcoming Visits for a Patient
+   Fetch Upcoming Visits for a Patient
    ==================================================== */
 router.get("/patient/:id/visits", authenticateDoctor, (req, res) => {
   const patientId = req.params.id;
@@ -251,7 +251,7 @@ router.get("/patient/:id/visits", authenticateDoctor, (req, res) => {
 });
 
 /* ====================================================
-   ✅ Update Prescription
+   Update Prescription
    ==================================================== */
    router.put("/prescription/:id", authenticateDoctor, (req, res) => {
     const prescriptionId = req.params.id;
@@ -266,7 +266,7 @@ router.get("/patient/:id/visits", authenticateDoctor, (req, res) => {
     
     db.query(deleteSql, [prescriptionId], (err, result) => {
       if (err) {
-        console.error("❌ Error deleting existing medicines:", err);
+        console.error("Error deleting existing medicines:", err);
         return res.status(500).json({ error: "Failed to update prescription" });
       }
       
@@ -283,7 +283,7 @@ router.get("/patient/:id/visits", authenticateDoctor, (req, res) => {
       
       db.query(insertSql, [medicineValues], (err, result) => {
         if (err) {
-          console.error("❌ Error inserting updated medicines:", err);
+          console.error("Error inserting updated medicines:", err);
           return res.status(500).json({ error: "Failed to update prescription" });
         }
         

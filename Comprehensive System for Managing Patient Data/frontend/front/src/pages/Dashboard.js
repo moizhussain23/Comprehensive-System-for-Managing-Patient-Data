@@ -609,15 +609,15 @@ export default function Dashboard() {
                   className="w-full p-2 border rounded pr-10 mb-1"
                 />
                 
-                {/* ✅ Eye Icon for Password Visibility Toggle */}
+                {/* Eye Icon for Password Visibility Toggle */}
                 <button
                   type="button"
                   className="absolute right-2 top-2 text-gray-500"
                   onMouseDown={() => setShowPassword({ ...showPassword, newPatientPassword: true })}
                   onMouseUp={() => setShowPassword({ ...showPassword, newPatientPassword: false })}
                   onMouseLeave={() => setShowPassword({ ...showPassword, newPatientPassword: false })}
-                  onTouchStart={() => setShowPassword({ ...showPassword, newPatientPassword: true })}  // ✅ Mobile Support
-                  onTouchEnd={() => setShowPassword({ ...showPassword, newPatientPassword: false })}  // ✅ Mobile Support
+                  onTouchStart={() => setShowPassword({ ...showPassword, newPatientPassword: true })}  // 
+                  onTouchEnd={() => setShowPassword({ ...showPassword, newPatientPassword: false })}  // 
                 >
                   {showPassword.newPatientPassword ? (
                     // Eye Open (Password Visible)
@@ -759,7 +759,7 @@ export default function Dashboard() {
             
 
             <div className="flex flex-col items-center">
-              {/* ✅ Download QR Button (Now Properly Aligned Left) */}
+              {/* Download QR Button (Now Properly Aligned Left) */}
               <button
                 onClick={downloadQRCode}
                 className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
@@ -768,7 +768,7 @@ export default function Dashboard() {
               </button>
 
               <div className="flex justify-end w-full">
-                {/* ✅ Back to List Button */}
+                {/* Back to List Button */}
                 <button
                   onClick={() => setSelectedPatient(null)}
                   className="bg-gray-100 text-gray-800 px-4 py-2 rounded mr-2 hover:bg-gray-200 transition-colors"
@@ -776,7 +776,7 @@ export default function Dashboard() {
                   Back to List
                 </button>
 
-                {/* ✅ Edit Patient Button */}
+                {/* Edit Patient Button */}
                 <button
                   onClick={() => {
                     setEditingPatient(selectedPatient);

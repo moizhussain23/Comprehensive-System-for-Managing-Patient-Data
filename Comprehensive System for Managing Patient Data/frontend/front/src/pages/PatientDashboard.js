@@ -64,7 +64,7 @@ export default function PatientDashboard() {
 
     } catch (error) {
       console.error("Error fetching patient data:", error);
-      alert("⚠️ Failed to load patient data.");
+      alert("Failed to load patient data.");
       navigate("/patient-login");
     } finally {
       setIsLoading(false);

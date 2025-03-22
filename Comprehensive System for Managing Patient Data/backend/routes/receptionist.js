@@ -4,7 +4,7 @@ const authenticate = require("../middleware/authenticate"); // Ensure user is lo
 
 const router = express.Router();
 
-// 📌 GET Receptionist Details API
+// GET Receptionist Details API
 router.get("/", authenticate, async (req, res) => {
   try {
     const userId = req.user.id; // Get user ID from token

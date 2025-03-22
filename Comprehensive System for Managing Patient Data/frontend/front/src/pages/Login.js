@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // ✅ Toggle State for Password Visibility
+  const [showPassword, setShowPassword] = useState(false); // Toggle State for Password Visibility
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ export default function LoginPage() {
       localStorage.setItem("role", data.user.role);
 
 
-      // ✅ Redirect to Receptionist Dashboard
+      // Redirect to Receptionist Dashboard
       if (data.user.role === "receptionist") {
         navigate("/dashboard");
       } else if (data.user.role === "doctor") {
@@ -77,7 +77,7 @@ export default function LoginPage() {
           </div>
           <div className="relative">
             <input
-              type={showPassword ? "text" : "password"} // ✅ Toggle Password Visibility
+              type={showPassword ? "text" : "password"} //  Toggle Password Visibility
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -85,15 +85,15 @@ export default function LoginPage() {
               required
             />
             
-            {/* ✅ Eye Icon for Toggle Password Visibility */}
+            {/*  Eye Icon for Toggle Password Visibility */}
             <button
               type="button"
               className="absolute right-2 top-2 text-gray-500"
               onMouseDown={() => setShowPassword(true)}
               onMouseUp={() => setShowPassword(false)}
               onMouseLeave={() => setShowPassword(false)}
-              onTouchStart={() => setShowPassword(true)}  // ✅ Mobile Support
-              onTouchEnd={() => setShowPassword(false)}  // ✅ Mobile Support
+              onTouchStart={() => setShowPassword(true)}  //  Mobile Support
+              onTouchEnd={() => setShowPassword(false)}  //  Mobile Support
             >
               {showPassword ? (
                 // Eye Open (Password Visible)

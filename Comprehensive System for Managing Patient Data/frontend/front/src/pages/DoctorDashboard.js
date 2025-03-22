@@ -142,7 +142,7 @@ export default function DoctorDashboard() {
   const saveVisit = async () => {
     try {
       if (!selectedPatient || !newVisitDate) {
-        alert("⚠️ Please select a date for the visit.");
+        alert("Please select a date for the visit.");
         return;
       }
       
@@ -189,10 +189,10 @@ export default function DoctorDashboard() {
       // Refresh visits list
       fetchVisits(selectedPatient.id);
       
-      alert(`✅ Visit successfully ${editingVisit ? "updated" : "scheduled"}!`);
+      alert(`Visit successfully ${editingVisit ? "updated" : "scheduled"}!`);
     } catch (error) {
       console.error("Error saving visit:", error);
-      alert("⚠️ Failed to save visit: " + error.message);
+      alert("Failed to save visit: " + error.message);
     }
   };
   
@@ -226,7 +226,7 @@ export default function DoctorDashboard() {
       setDoctorData(data);
     } catch (error) {
       console.error("Error fetching doctor profile:", error);
-      alert("⚠️ Failed to load doctor profile.");
+      alert("Failed to load doctor profile.");
       navigate("/doctor-login");
     }
   }, [navigate]);
@@ -253,8 +253,8 @@ export default function DoctorDashboard() {
       const data = await response.json();
       setPatients(data.patients);
     } catch (error) {
-      console.error("❌ Error fetching patients:", error);
-      alert("⚠️ Failed to load patients data.");
+      console.error("Error fetching patients:", error);
+      alert("Failed to load patients data.");
     } finally {
       setIsLoading(false);
     }
@@ -284,7 +284,7 @@ export default function DoctorDashboard() {
       setPrescriptions(data.prescriptions);
     } catch (error) {
       console.error("Error fetching prescriptions:", error);
-      alert("⚠️ Failed to load prescriptions.");
+      alert("Failed to load prescriptions.");
     } finally {
       setIsLoading(false);
     }
@@ -314,7 +314,7 @@ export default function DoctorDashboard() {
       setVisits(data);
     } catch (error) {
       console.error("Error fetching visits:", error);
-      alert("⚠️ Failed to load visits.");
+      alert("Failed to load visits.");
     } finally {
       setIsLoading(false);
     }
@@ -324,7 +324,7 @@ export default function DoctorDashboard() {
   const addPrescription = async () => {
     try {
       if (!selectedPatient || medicines.length === 0) {
-        alert("⚠️ Select a patient and add at least one medicine.");
+        alert("Select a patient and add at least one medicine.");
         return;
       }
   
@@ -356,10 +356,10 @@ export default function DoctorDashboard() {
   
       setMedicines([]);
       fetchPrescriptions(selectedPatient.id);
-      alert("✅ Prescription added successfully!");
+      alert("Prescription added successfully!");
     } catch (error) {
       console.error("Error adding prescription:", error);
-      alert("⚠️ Failed to add prescription: " + error.message);
+      alert("Failed to add prescription: " + error.message);
     }
   };
 
@@ -371,7 +371,7 @@ export default function DoctorDashboard() {
       !newMedicine.frequency ||
       !newMedicine.duration
     ) {
-      alert("⚠️ Please fill all medicine details before adding.");
+      alert("Please fill all medicine details before adding.");
       return;
     }
   
@@ -383,7 +383,7 @@ export default function DoctorDashboard() {
   const handlePrescriptionUpdate = async () => {
     try {
       if (!editingPrescription || editingMedicines.length === 0) {
-        alert("⚠️ Please ensure all medicine details are filled.");
+        alert("Please ensure all medicine details are filled.");
         return;
       }
   
@@ -408,10 +408,10 @@ export default function DoctorDashboard() {
       setEditingPrescription(null);
       setEditingMedicines([]);
       fetchPrescriptions(selectedPatient.id);
-      alert("✅ Prescription updated successfully!");
+      alert("Prescription updated successfully!");
     } catch (error) {
       console.error("Error updating prescription:", error);
-      alert("⚠️ Failed to update prescription: " + error.message);
+      alert("Failed to update prescription: " + error.message);
     }
   };
 
@@ -507,10 +507,10 @@ export default function DoctorDashboard() {
       }
 
       fetchVisits(selectedPatient.id);
-      alert("✅ Visit deleted successfully!");
+      alert("Visit deleted successfully!");
     } catch (error) {
       console.error("Error deleting visit:", error);
-      alert("⚠️ Failed to delete visit: " + error.message);
+      alert("Failed to delete visit: " + error.message);
     }
   };
 
