@@ -47,7 +47,7 @@ router.post("/", authenticate, async (req, res) => {
       const patientId = result.insertId;
 
       // Generate QR Code with email & patient ID
-      const patientLoginURL = `http://${process.env.REACT_APP_SERVER_IP}:3000/?email=${email}&id=${patientId}`;
+      const patientLoginURL = `https://${process.env.REACT_APP_SERVER_IP}/?email=${email}&id=${patientId}`;
       const qrCodeBase64 = await QRCode.toDataURL(patientLoginURL);
 
       // Store QR Code in the database
