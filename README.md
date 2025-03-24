@@ -1,86 +1,115 @@
-# Comprehensive System for Managing Patient Data
+# **Comprehensive System for Managing Patient Data (CSMPD)**
 
-A robust web-based application designed to streamline the management of patient records, appointments, and medical histories within healthcare facilities. This system ensures efficient data handling, enhancing both administrative operations and patient care.
-
-## Features
-
-- **Patient Registration**: Securely register new patients with comprehensive personal and medical information.
-- **Appointment Scheduling**: Efficiently manage and schedule patient appointments with healthcare providers.
-- **Medical Records Management**: Maintain detailed and up-to-date medical histories for all patients.
-- **User Authentication**: Ensure data security with role-based access controls for administrators and medical staff.
-
-## Technologies Used
-
-- **Frontend**: React.js, HTML5, CSS3, JavaScript
-- **Backend**: Node.js, Express.js
-- **Database**: MySQL
-- **Version Control**: Git
-
-## Installation and Setup
-
-1. **Clone the Repository**:
-
-   ```bash
-   git clone https://github.com/moizhussain23/Comprehensive-System-for-Managing-Patient-Data.git
-   cd Comprehensive-System-for-Managing-Patient-Data
-   ```
-
-2. **Install Backend Dependencies**:
-
-   ```bash
-   cd backend
-   npm install
-   ```
-
-3. **Configure the Backend**:
-
-   - Create a `.env` file in the `backend` directory with the following variables:
-     ```
-     DB_HOST=your_database_host
-     DB_USER=your_database_user
-     DB_PASSWORD=your_database_password
-     DB_NAME=your_database_name
-     ```
-   - Ensure your MySQL database is set up and accessible with the provided credentials.
-
-4. **Start the Backend Server**:
-
-   ```bash
-   npm start
-   ```
-
-   The backend server will run on `http://localhost:5000`.
-
-5. **Install Frontend Dependencies**:
-
-   ```bash
-   cd ../frontend
-   npm install
-   ```
-
-6. **Configure the Frontend**:
-
-   - Create a `.env` file in the `frontend` directory with the following variable:
-     ```
-     REACT_APP_API_URL=http://localhost:5000
-     ```
-
-7. **Start the Frontend Server**:
-
-   ```bash
-   npm start
-   ```
-
-   Access the application at `http://localhost:3000`.
-
-## Contributing
-
-Contributions are welcome! Please fork the repository and submit a pull request with your proposed changes.
-
-
-
-## Contact
-
-For questions or support, please contact [Moiz Hussain](mailto\:mz5hus7@gmail.com).
+A robust and fully digitalized **Hospital Management System** designed to streamline patient data handling, improve efficiency, and minimize paperwork. The system supports **three user roles**—**Receptionist, Doctor, and Patient**—with secure QR-based authentication and real-time data access.
 
 ---
+
+## **🚀 Live Demo Links**
+- **Receptionist Portal**: [Receptionist Login](http://csmpd-receptionist-login.netlify.app)
+- **Doctor Portal**: [Doctor Login](http://csmpd-doctor-login.netlify.app)
+- **Patient Portal**: [Patient Login](http://csmpd-patient-login.netlify.app)
+
+---
+
+## **🌟 Features**
+- **Secure Authentication**: Login via **email/password** or **QR Code-based login (for patients)**.
+- **Role-Based Access**:
+  - **Receptionists** can register patients, manage appointments, and generate QR codes.
+  - **Doctors** can access patient history, add prescriptions, and monitor visits.
+  - **Patients** can view their medical records, prescriptions, and upcoming appointments.
+- **Real-time Data Management**: Automatic updates of patient records.
+- **Multi-Page Deployment**: Separate login portals for each role (**Receptionist, Doctor, and Patient**).
+- **Deployed on Netlify & Railway**: Frontend on **Netlify**, Backend & Database on **Railway**.
+
+---
+
+## **🛠️ Tech Stack**
+### **Frontend**
+- React.js (with React Router for role-based navigation)
+- Tailwind CSS for styling
+- Netlify for hosting
+
+### **Backend**
+- Node.js with Express.js
+- MySQL Database
+- Railway.app for backend & database hosting
+- JWT for authentication
+
+---
+
+## **📌 Project Structure**
+```
+Comprehensive System for Managing Patient Data
+│── backend/              # Node.js backend with Express & MySQL
+│── frontend/
+│   │── receptionist/     # Receptionist login & dashboard
+│   │── doctor/          # Doctor login & dashboard
+│   │── patient/         # Patient login & dashboard
+│── README.md
+│── .env                 # Environment variables (backend)
+
+```
+
+---
+
+## **🔧 Installation & Setup**
+### **1️⃣ Clone the Repository**
+```sh
+git clone https://github.com/moizhussain23/Comprehensive-System-for-Managing-Patient-Data.git
+cd CSMPD
+```
+
+### **2️⃣ Backend Setup**
+```sh
+cd backend
+npm install
+```
+- **Configure `.env` file in backend/**
+  ```
+  DB_HOST=your_database_host
+  DB_USER=your_database_user
+  DB_PASSWORD=your_database_password
+  DB_NAME=your_database_name
+  BACKEND_URL=https://your-backend-url.com
+  PORT=5000
+  ```
+- **Run the Backend**:
+  ```sh
+  npm start
+  ```
+  _Backend will be running at `Your backend host`_
+
+---
+
+### **3️⃣ Frontend Setup (for Each Role)**
+Go to each folder (`receptionist`, `doctor`, `patient`) and install dependencies:
+```sh
+cd frontend/receptionist
+npm install
+npm run build
+```
+_Repeat for doctor & patient_
+
+
+---
+
+## **🔑 Login Credentials for Testing**
+| Role         | Email                        | Password               |
+|--------------|------------------------------|------------------------|
+| Receptionist | Bernardcampbell@example.com  | receptionist1@pass     |
+| Doctor       | Sarahsmith@example.com       | doctor2@pass           |
+| Patient      | robert.johnson@example.com   | robertJ@789            |
+
+---
+
+## **📢 Issues & Contributions**
+Feel free to **open an issue** or **submit a pull request** to enhance this system.
+
+---
+
+## **📜 License**
+This project is licensed under the **MIT License**.
+
+---
+
+💡 **Developed & Maintained by**: [MOIZ HUSSAIN](https://github.com/moizhussain23)
